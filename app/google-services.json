@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1004740327976",
+    "project_id": "fir-pw-dfb4c",
+    "storage_bucket": "fir-pw-dfb4c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004740327976:android:9c9030d6fea5650497131d",
+        "android_client_info": {
+          "package_name": "com.example.firebasepw"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7J1Vq-cNqokEi0xcn5FkIwGI9n1lVTek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
