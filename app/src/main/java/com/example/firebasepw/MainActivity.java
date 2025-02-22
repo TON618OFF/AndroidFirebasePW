@@ -126,15 +126,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void redirectToDashboard(String role) {
         Intent intent;
-        if ("admin".equals(role)) {
-            intent = new Intent(this, AdminDashboardActivity.class);
-        } else if ("employee".equals(role)) {
-            intent = new Intent(this, EmployeeDashboardActivity.class);
-        } else {
-            Toast.makeText(this, "Неизвестная роль пользователя", Toast.LENGTH_LONG).show();
-            mAuth.signOut();
-            resetUI();
-            return;
+        switch (role) {
+            case "admin":
+                intent = new Intent(this, AdminDashboardActivity.class);
+                break;
+            case "employee":
+                intent = new Intent(this, EmployeeDashboardActivity.class);
+                break;
+            case "user":
+                intent = new Intent(this, UserActivity.class);
+                break;
+            default:
+                Toast.makeText(this, "Неизвестная роль пользователя", Toast.LENGTH_LONG).show();
+                mAuth.signOut();
+                resetUI();
+                return;
         }
 
         progressBar.setVisibility(View.GONE);

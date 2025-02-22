@@ -32,7 +32,7 @@
         android:id="@+id/roleEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Роль (admin/employee)"
+        android:hint="Роль (admin/employee/user)"
         android:layout_marginBottom="16dp"/>
 
     <Button

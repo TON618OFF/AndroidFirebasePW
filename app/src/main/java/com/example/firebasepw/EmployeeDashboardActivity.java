@@ -24,11 +24,9 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        // Инициализация кнопок
         manageServicesButton = findViewById(R.id.manageServicesButton);
         logoutButton = findViewById(R.id.logoutButton);
 
-        // Настройка обработчиков
         manageServicesButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, ServiceManagementActivity.class);
             startActivity(intent);

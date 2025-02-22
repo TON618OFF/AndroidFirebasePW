@@ -36,13 +36,11 @@ public class AuthManager {
                                 .document(user.getUid())
                                 .set(newUser)
                                 .addOnSuccessListener(aVoid -> {
-                                    // Обновляем токен после записи роли
                                     user.getIdToken(true).addOnSuccessListener(result -> {
                                         callback.onSuccess(user.getUid());
                                     });
                                 })
                                 .addOnFailureListener(e -> {
-                                    // Если не удалось записать в Firestore, удаляем пользователя из Authentication
                                     user.delete();
                                     callback.onError(e);
                                 });

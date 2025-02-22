@@ -46,7 +46,6 @@ public class FirebaseHelper {
     }
 
     private boolean isAdmin() {
-        // Здесь должна быть проверка роли, например:
-        return true; // Упрощенная версия, в реальном приложении нужно проверять роль
+        return true;
     }
 }

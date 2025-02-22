@@ -18,31 +18,44 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.Servic
     private List<Service> filteredServices;
     private Consumer<Service> onEditClick;
     private Consumer<Service> onDeleteClick;
+    private Consumer<Service> onServiceClick;
+    private boolean isManagementMode;
 
-    public ServicesAdapter(List<Service> services, Consumer<Service> onEditClick,
-                           Consumer<Service> onDeleteClick) {
+    public ServicesAdapter(List<Service> services, Consumer<Service> onEditClick, Consumer<Service> onDeleteClick) {
         this.services = services;
         this.filteredServices = new ArrayList<>(services);
         this.onEditClick = onEditClick;
         this.onDeleteClick = onDeleteClick;
+        this.isManagementMode = true;
+    }
+
+    public ServicesAdapter(List<Service> services, Consumer<Service> onServiceClick, boolean isManagementMode) {
+        this.services = services;
+        this.filteredServices = new ArrayList<>(services);
+        this.onServiceClick = onServiceClick;
+        this.isManagementMode = isManagementMode;
     }
 
     @Override
     public ServiceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_service, parent, false);
-        return new ServiceViewHolder(view);
+        int layoutRes = isManagementMode ? R.layout.item_service : R.layout.item_service_user;
+        View view = LayoutInflater.from(parent.getContext()).inflate(layoutRes, parent, false);
+        return new ServiceViewHolder(view, isManagementMode);
     }
 
     @Override
     public void onBindViewHolder(ServiceViewHolder holder, int position) {
         Service service = filteredServices.get(position);
         holder.nameTextView.setText(service.getName());
-        holder.categoryTextView.setText(service.getCategory());
-        holder.priceTextView.setText(String.format("%.2f", service.getPrice()));
 
-        holder.editButton.setOnClickListener(v -> onEditClick.accept(service));
-        holder.deleteButton.setOnClickListener(v -> onDeleteClick.accept(service));
+        if (isManagementMode) {
+            holder.categoryTextView.setText(service.getCategory());
+            holder.priceTextView.setText(String.format("%.2f", service.getPrice()));
+            holder.editButton.setOnClickListener(v -> onEditClick.accept(service));
+            holder.deleteButton.setOnClickListener(v -> onDeleteClick.accept(service));
+        } else {
+            holder.itemView.setOnClickListener(v -> onServiceClick.accept(service));
+        }
     }
 
     @Override
@@ -60,13 +73,15 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.Servic
         TextView nameTextView, categoryTextView, priceTextView;
         Button editButton, deleteButton;
 
-        ServiceViewHolder(View itemView) {
+        ServiceViewHolder(View itemView, boolean isManagementMode) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
-            categoryTextView = itemView.findViewById(R.id.categoryTextView);
-            priceTextView = itemView.findViewById(R.id.priceTextView);
-            editButton = itemView.findViewById(R.id.editButton);
-            deleteButton = itemView.findViewById(R.id.deleteButton);
+            if (isManagementMode) {
+                categoryTextView = itemView.findViewById(R.id.categoryTextView);
+                priceTextView = itemView.findViewById(R.id.priceTextView);
+                editButton = itemView.findViewById(R.id.editButton);
+                deleteButton = itemView.findViewById(R.id.deleteButton);
+            }
         }
     }
 }

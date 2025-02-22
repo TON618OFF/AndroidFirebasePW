@@ -41,9 +41,8 @@ public class ServiceManagementActivity extends AppCompatActivity {
         firebaseHelper = new FirebaseHelper();
         serviceList = new ArrayList<>();
         categories = new ArrayList<>();
-        categories.add("Все категории"); // Добавляем опцию для отображения всех услуг
+        categories.add("Все категории");
 
-        // Инициализация UI
         servicesRecyclerView = findViewById(R.id.servicesRecyclerView);
         searchEditText = findViewById(R.id.searchEditText);
         categorySpinner = findViewById(R.id.categorySpinner);

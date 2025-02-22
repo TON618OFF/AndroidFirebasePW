@@ -41,7 +41,7 @@ public class RegistrationActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         String name = nameEditText.getText().toString().trim();
-        String role = roleEditText.getText().toString().trim();
+        String role = roleEditText.getText().toString().trim().toLowerCase();
 
         if (TextUtils.isEmpty(email)) {
             emailEditText.setError("Введите email");
@@ -59,8 +59,8 @@ public class RegistrationActivity extends AppCompatActivity {
             nameEditText.setError("Введите имя");
             return;
         }
-        if (!role.equals("admin") && !role.equals("employee")) {
-            roleEditText.setError("Роль должна быть 'admin' или 'employee'");
+        if (!role.equals("admin") && !role.equals("employee") && !role.equals("user")) {
+            roleEditText.setError("Роль должна быть 'admin', 'employee' или 'user'");
             return;
         }
 
